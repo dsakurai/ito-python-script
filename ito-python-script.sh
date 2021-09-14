@@ -10,6 +10,7 @@
 # Submit this job with pjsub!
 
 # Warning: you can't run multiple instances of this script because `pyenv local` associates one python binary to the current directory at a time. This perhaps can be avoided by using `pyenv load` instead.  
+# See the discussion at https://github.com/pyenv/pyenv/issues/492
 
 set -e # Abort the script when error emerges
 
