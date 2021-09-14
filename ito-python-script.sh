@@ -8,6 +8,7 @@
 #PJM -X
 
 # Submit this job with pjsub!
+# Warning: you can't submit multiple instances of this script because `pyenv local` associates one python binary for a directory at a time. This can probably avoided by using `pyenv load` instead.  
 
 set -e # Abort the script when error emerges
 
