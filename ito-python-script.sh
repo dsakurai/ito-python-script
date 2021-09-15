@@ -11,7 +11,9 @@
 
 set -e # Abort the script when error emerges
 
-MY_PYTHON_VERSION=3.9.5
+# The Python version to be used.
+# Don't rename this varible because it is referenced by pyenv.
+export PYENV_VERSION=3.8.12
 
 # Create a new virtual environment
 WORK_DIR=`mktemp -d -t python_venv-XXXXXXX`
@@ -35,11 +37,12 @@ git clone https://github.com/pyenv/pyenv.git "${PYENV_ROOT}"
 export PATH="${PYENV_ROOT}/bin:$PATH"
 
 
-# Install the lates Python 3
-pyenv install "${MY_PYTHON_VERSION}"
+# Install the latest Python 3
+# Make sure you exported PYENV_VERSION before this line
+pyenv install "${PYENV_VERSION}"
 eval "$(pyenv init --path)" # Set the PATH variable to the desired Python
 
-echo the program `python` now resolves to `which python`
+echo the program 'python' now resolves to `which python`
 echo which is `python --version`
 
 # Create venv
