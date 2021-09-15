@@ -9,9 +9,6 @@
 
 # Submit this job with pjsub!
 
-# Warning: you can't run multiple instances of this script because `pyenv local` associates one python binary to the current directory at a time. This perhaps can be avoided by using `pyenv load` instead.  
-# See the discussion at https://github.com/pyenv/pyenv/issues/492
-
 set -e # Abort the script when error emerges
 
 MY_PYTHON_VERSION=3.9.5
@@ -29,8 +26,8 @@ if [[ ! "$WORK_DIR" || ! -d "$WORK_DIR" ]]; then
 fi
 
 # Install pyenv
-echo "Install pyenv"
 export PYENV_ROOT="${WORK_DIR}/pyenv"
+echo "Install pyenv to ${PYENV_ROOT}"
 
 git clone https://github.com/pyenv/pyenv.git "${PYENV_ROOT}"
 
@@ -40,11 +37,9 @@ export PATH="${PYENV_ROOT}/bin:$PATH"
 
 # Install the lates Python 3
 pyenv install "${MY_PYTHON_VERSION}"
-eval "$(pyenv init --path)"
-pyenv local "${MY_PYTHON_VERSION}"
-echo "Path: ${PATH}"
+eval "$(pyenv init --path)" # Set the PATH variable to the desired Python
 
-echo Pyenv loaded python at `which python`
+echo the program `python` now resolves to `which python`
 echo which is `python --version`
 
 # Create venv
