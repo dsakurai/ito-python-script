@@ -8,6 +8,8 @@
 #PJM -X
 
 # Submit this job with pjsub!
+# If this script suddenly stops running, you probably
+# forgot to change the pjsub parameters, which lie at the beginning of this script.
 
 set -e # Abort the script when error emerges
 
