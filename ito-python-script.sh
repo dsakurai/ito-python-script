@@ -3,7 +3,7 @@
 #PJM -L "rscgrp=ito-g-1-dbg"
 #PJM -L "vnode=1"
 #PJM -L "vnode-core=9"
-#PJM -L "elapse=00:01:00"
+#PJM -L "elapse=00:15:00"
 #PJM -j
 #PJM -X
 
@@ -11,11 +11,16 @@
 
 set -e # Abort the script when error emerges
 
+# Uncomment to load CUDA. The current newest on ITO supercomputer is 11.0
+# module load cuda/11.0
+
 # The Python version to be used.
-# Don't rename this varible because it is referenced by pyenv.
+# The version depends on the versions of CUDA, tensorflow etc. For Tensorflow check https://www.tensorflow.org/install/source#gpu
+#
+# Warning: don't rename this varible because pyenv depends on it.
 export PYENV_VERSION=3.8.12
 
-# Create a new virtual environment
+# Create a new temporary work directory for installing pyenv, python, python venv and such.
 WORK_DIR=`mktemp -d -t python_venv-XXXXXXX`
 
 
@@ -33,12 +38,11 @@ echo "Install pyenv to ${PYENV_ROOT}"
 
 git clone https://github.com/pyenv/pyenv.git "${PYENV_ROOT}"
 
-# Activate pyenv
+# Expose pyenv to the OS
 export PATH="${PYENV_ROOT}/bin:$PATH"
 
-
-# Install the latest Python 3
-# Make sure you exported PYENV_VERSION before this line
+# Install the specified Python version.
+# PYENV_VERSION must be exported before this line
 pyenv install "${PYENV_VERSION}"
 eval "$(pyenv init --path)" # Set the PATH variable to the desired Python
 
@@ -73,14 +77,9 @@ echo Upgraded pip
 # Install packages
 
 
-# pip3 install tensorflow-gpu==2.1.0
-# pip3 install keras==2.3.1
-# pip3 install matplotlib==3.2.2
-# pip3 install jsonschema
-# pip3 install pillow==7.1.2
-# pip3 install numpy
-# pip3 install configparser
+# pip3 install tensorflow-gpu==2.1.0 # tensorflow-gpu has the benefit that it will work only when a GPU is employed and crash otherwise.
 
+# Run some python script
 # python3 source/training/PlasticIdentifier_19layer.py
 
 
