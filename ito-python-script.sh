@@ -8,6 +8,12 @@
 #PJM -X
 
 # Submit this job with pjsub!
+#
+# ~~~
+# $ pjsub ito-python-script.sh
+# ~~~
+#
+#
 # If this script suddenly stops running, you probably
 # forgot to change the pjsub parameters, which lie at the beginning of this script.
 
